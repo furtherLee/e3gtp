@@ -1,5 +1,6 @@
 package e3gtp.command;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class Command {
 		return id != null;
 	}
 	
-	public void send(Connection conn){
+	public void send(Connection conn) throws IOException{
 		conn.send(this.format());
 	}
 	

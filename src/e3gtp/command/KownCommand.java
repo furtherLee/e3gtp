@@ -6,13 +6,18 @@ public class KownCommand extends Command{
 
 	public static final String name = "known_command";
 	
-	public KownCommand(){
+	public KownCommand(STRING commandName){
 		super(name);
+		this.args.add(commandName);
 	}
 	
-	public KownCommand(int id, STRING string){
+	public KownCommand(int id, STRING commandName){
 		super(id, name);
-		this.args.add(string);
+		this.args.add(commandName);
+	}
+	
+	public STRING getCommandName(){
+		return (STRING)this.args.get(0);
 	}
 	
 }

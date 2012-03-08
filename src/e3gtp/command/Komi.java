@@ -1,5 +1,23 @@
 package e3gtp.command;
 
-public class Komi extends Command{
+import e3gtp.entity.FLOAT;
 
+public class Komi extends Command{
+	
+	public static final String name = "komi";
+	
+	public Komi(FLOAT new_komi){
+		super(name);
+		this.args.add(new_komi);
+	}
+	
+	public Komi(int id, FLOAT new_komi){
+		super(id, name);
+		this.args.add(new_komi);
+	}
+	
+	public FLOAT getNewKomi(){
+		return (FLOAT)this.args.get(0);
+	}
+	
 }
