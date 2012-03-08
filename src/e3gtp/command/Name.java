@@ -1,5 +1,5 @@
 package e3gtp.command;
 
-public class Name {
+public class Name extends Command{
 
 }

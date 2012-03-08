@@ -8,11 +8,11 @@ import e3gtp.entity.Entity;
 
 public class Command {
 
-	protected String name;
+	protected final String name;
 	
-	protected Integer id;
+	protected final Integer id;
 	
-	protected List<Entity> args;
+	protected final List<Entity> args;
 	
 	protected Command(String name){
 		this.name = name;
@@ -50,4 +50,5 @@ public class Command {
 		
 		return sb.toString();
 	}
+	
 }

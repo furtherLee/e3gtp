@@ -1,5 +1,5 @@
 package e3gtp.command;
 
-public class ClearBoard {
+public class ClearBoard extends Command{
 
 }

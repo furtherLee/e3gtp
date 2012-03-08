@@ -1,5 +1,5 @@
 package e3gtp.command;
 
-public class Komi {
+public class Komi extends Command{
 
 }

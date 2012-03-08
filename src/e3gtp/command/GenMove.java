@@ -1,5 +1,5 @@
 package e3gtp.command;
 
-public class GenMove {
+public class GenMove extends Command{
 
 }
