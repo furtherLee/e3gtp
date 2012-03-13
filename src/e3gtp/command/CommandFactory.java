@@ -169,19 +169,44 @@ public class CommandFactory {
 	}
 	
 	private FLOAT parseFloat(String str){
-		// TODO
+		float value;
+		try{
+			value = Float.parseFloat(str.trim());
+		}
+		catch(NumberFormatException e){
+			throw new SyntaxException(str + " is not a float.");
+		}
+		return new FLOAT(value);
 	}
 	
 	private INT parseInt(String str){
-		// TODO
+		int value;
+		try{
+			value = Integer.parseInt(str.trim());
+		}
+		catch(NumberFormatException e){
+			throw new SyntaxException(str + " is not a float.");
+		}
+		return new INT(value);
 	}
 	
 	private MOVE parseMove(String str){
-		// TODO
+		str = str.trim();
+		
+		String[] params = str.split(" ");
+		
+		COLOR color = parseColor(params[0]);
+		
+		VERTEX vertex = parseVertex(params[1]);
+		
+		return new MOVE(color, vertex);
 	}
 	
 	private VERTEX parseVertex(String str){
-		// TODO
+		str = str.trim();
+		String column = str.substring(0, 1);
+		INT row = parseInt(str.substring(1, str.length()));
+		return new VERTEX(column, row.getInt());
 	}
 
 	private STRING parseString(String str){
@@ -204,7 +229,6 @@ public class CommandFactory {
 	}
 	
 	private boolean isInteger(String str){
-		
 		try{
 			Integer.parseInt(str);
 		}
