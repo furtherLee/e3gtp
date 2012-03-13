@@ -28,12 +28,13 @@ public class Connection {
 	}
 	
 	public String read() throws IOException{
-
 		return in.readLine();
 	}
 	
-	public void abort(){
+	public void abort() throws IOException{
 		working = false;
+		in.close();
+		out.close();
 		this.in = null;
 		this.out = null;
 	}
