@@ -1,5 +1,6 @@
 package e3gtp.command;
 
+import e3gtp.connection.Response;
 import e3gtp.entity.MOVE;
 
 public class Play extends Command{
@@ -18,5 +19,10 @@ public class Play extends Command{
 	
 	public MOVE getMove(){
 		return (MOVE)this.args.get(0);
+	}
+	
+	@Override
+	public Response accept(CommandVisitor visitor) {
+		return visitor.visit(this);
 	}
 }

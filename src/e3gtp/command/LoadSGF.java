@@ -1,5 +1,6 @@
 package e3gtp.command;
 
+import e3gtp.connection.Response;
 import e3gtp.entity.INT;
 import e3gtp.entity.STRING;
 
@@ -27,4 +28,8 @@ public class LoadSGF extends Command{
 		return (INT)this.args.get(1);
 	}
 	
+	@Override
+	public Response accept(CommandVisitor visitor) {
+		return visitor.visit(this);
+	}
 }

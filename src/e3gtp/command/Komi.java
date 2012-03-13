@@ -1,5 +1,6 @@
 package e3gtp.command;
 
+import e3gtp.connection.Response;
 import e3gtp.entity.FLOAT;
 
 public class Komi extends Command{
@@ -19,5 +20,11 @@ public class Komi extends Command{
 	public FLOAT getNewKomi(){
 		return (FLOAT)this.args.get(0);
 	}
+
+	@Override
+	public Response accept(CommandVisitor visitor) {
+		return visitor.visit(this);
+	}
+	
 	
 }

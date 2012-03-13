@@ -3,6 +3,7 @@ package e3gtp.command;
 import java.util.LinkedList;
 import java.util.List;
 
+import e3gtp.connection.Response;
 import e3gtp.entity.Entity;
 import e3gtp.entity.VERTEX;
 
@@ -34,4 +35,8 @@ public class SetFreeHandicap extends Command{
 		return vertices;
 	}
 	
+	@Override
+	public Response accept(CommandVisitor visitor) {
+		return visitor.visit(this);
+	}
 }

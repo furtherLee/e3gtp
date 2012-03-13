@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-import e3gtp.connection.Connection;
+import e3gtp.connection.*;
 import e3gtp.entity.Entity;
 
-public class Command {
+public abstract class Command {
 
 	protected final String name;
 	
@@ -51,5 +51,11 @@ public class Command {
 		
 		return sb.toString();
 	}
+
+	public Integer getId(){
+		return id;
+	}
+	
+	abstract public Response accept(CommandVisitor visitor);
 	
 }

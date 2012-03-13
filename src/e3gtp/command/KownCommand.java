@@ -1,5 +1,6 @@
 package e3gtp.command;
 
+import e3gtp.connection.Response;
 import e3gtp.entity.STRING;
 
 public class KownCommand extends Command{
@@ -19,5 +20,9 @@ public class KownCommand extends Command{
 	public STRING getCommandName(){
 		return (STRING)this.args.get(0);
 	}
-	
+
+	@Override
+	public Response accept(CommandVisitor visitor) {
+		return visitor.visit(this);
+	}
 }
