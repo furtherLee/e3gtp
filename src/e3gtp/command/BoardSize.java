@@ -11,9 +11,9 @@ public class BoardSize extends Command{
 		this.args.add(new INT(size));
 	}
 	
-	public BoardSize(int id, int size){
+	public BoardSize(int id, INT num){
 		super(id, name);
-		this.args.add(new INT(size));
+		this.args.add(num);
 	}
 	
 	public int getSize(){

@@ -1,12 +1,34 @@
 package e3gtp.command;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 import e3gtp.exception.SyntaxException;
-import e3gtp.command.*;
 import e3gtp.entity.*;
 
 public class CommandFactory {
+	
+	public static final List<String> CommandSupported = new LinkedList<String>();
+	
+	static{
+		CommandSupported.add(BoardSize.name);
+		CommandSupported.add(ClearBoard.name);
+		CommandSupported.add(FixedHandicap.name);
+		CommandSupported.add(GenMove.name);
+		CommandSupported.add(Komi.name);
+		CommandSupported.add(KownCommand.name);
+		CommandSupported.add(ListCommands.name);
+		CommandSupported.add(LoadSGF.name);
+		CommandSupported.add(Name.name);
+		CommandSupported.add(PlaceFreeHandicap.name);
+		CommandSupported.add(Play.name);
+		CommandSupported.add(ProtocolVersion.name);
+		CommandSupported.add(Quit.name);
+		CommandSupported.add(RegGenMove.name);
+		CommandSupported.add(SetFreeHandicap.name);
+		CommandSupported.add(Version.name);
+	}
 	
 	private static CommandFactory instance;
 	
@@ -20,7 +42,7 @@ public class CommandFactory {
 	}
 	
 	public Command parseCommand(String str){
-		Integer id = null;
+		Integer id = -1;
 		
 		int offset = 0;
 		
@@ -73,91 +95,132 @@ public class CommandFactory {
 	}
 	
 	private Command buildVersion(Integer id, String[] args) {
-		// TODO Auto-generated method stub
-		return null;
+		assertEmpty(args);
+		return new Version(id);
 	}
 
 	private Command buildSetFreeHandicap(Integer id, String[] args) {
-		// TODO Auto-generated method stub
-		return null;
+		assertNoLessThan(args, 1);
+		isComment(args[0], true);
+		
+		List<VERTEX> vertices = new LinkedList<VERTEX>();
+		
+		for (String str: args){
+			if (isComment(str))
+				break;
+			vertices.add(parseVertex(str));
+		}
+		
+		return new SetFreeHandicap(id, vertices);
 	}
 
 	private Command buildRegGenMove(Integer id, String[] args) {
-		// TODO Auto-generated method stub
-		return null;
+		assertEmpty(args);
+		assertNoLessThan(args, 2);
+		COLOR color = parseColor(args[1]);
+		if (args.length > 2)
+			isComment(args[2], true);
+		return new RegGenMove(id, color);
 	}
 
 	private Command buildQuit(Integer id, String[] args) {
-		// TODO Auto-generated method stub
-		return null;
+		assertEmpty(args);
+		return new Quit(id);
 	}
 
 	private Command buildPlay(Integer id, String[] args) {
-		// TODO Auto-generated method stub
-		return null;
+		assertNoLessThan(args, 2);
+		MOVE move = parseMove(args[0] + " " + args[1]);
+		if (args.length > 2)
+			isComment(args[2], true);
+		return new Play(id, move);
 	}
 
 	private Command buildProtocolVersion(Integer id, String[] args) {
-		// TODO Auto-generated method stub
-		return null;
+		assertEmpty(args);
+		return new ProtocolVersion(id);
 	}
 
 	private Command buildPlaceFreeHandicap(Integer id, String[] args) {
-		// TODO Auto-generated method stub
-		return null;
+		assertNoLessThan(args, 2);
+		INT num = parseInt(args[1]);
+		if (args.length > 2)
+			isComment(args[2], true);
+		return new PlaceFreeHandicap(id, num);
 	}
 
 	private Command buildName(Integer id, String[] args) {
-		// TODO Auto-generated method stub
-		return null;
+		assertEmpty(args);
+		return new Name(id);
 	}
 
 	private Command buildLoadSGF(Integer id, String[] args) {
-		// TODO Auto-generated method stub
-		return null;
+		assertNoLessThan(args, 3);
+		STRING str = parseString(args[1]);
+		INT num = parseInt(args[2]);
+		if (args.length > 3)
+			isComment(args[3], true);
+		return new LoadSGF(id, str, num);
 	}
 
 	private Command buildListCommands(Integer id, String[] args) {
-		// TODO Auto-generated method stub
-		return null;
+		assertEmpty(args);
+		return new ListCommands(id);
 	}
 
 	private Command buildKownCommand(Integer id, String[] args) {
-		// TODO Auto-generated method stub
-		return null;
+		assertNoLessThan(args, 2);
+		STRING str = parseString(args[1]);
+		if (args.length > 2)
+			isComment(args[2], true);
+		return new KownCommand(id, str);
 	}
 
 	private Command buildKomi(Integer id, String[] args) {
-		// TODO Auto-generated method stub
-		return null;
+		assertNoLessThan(args, 2);
+		FLOAT num = parseFloat(args[1]);
+		if (args.length > 2)
+			isComment(args[2], true);
+		return new Komi(id, num);
 	}
 
 	private Command buildGenMove(Integer id, String[] args) {
-		// TODO Auto-generated method stub
-		return null;
+		assertNoLessThan(args, 2);
+		COLOR color = parseColor(args[1]);
+		if (args.length > 2)
+			isComment(args[2], true);
+		return new GenMove(id, color);
 	}
 
 	private Command buildFixedHandicap(Integer id, String[] args) {
-		// TODO Auto-generated method stub
-		return null;
+		assertNoLessThan(args, 2);
+		INT num = parseInt(args[1]);
+		if (args.length > 2)
+			isComment(args[2], true);
+		return new FixedHandicap(id, num);
 	}
 
 	private Command buildClearBoard(Integer id, String[] args) {
-		// TODO Auto-generated method stub
-		return null;
+		assertEmpty(args);
+		return new ClearBoard(id);
 	}
 
 	private Command buildBoardSize(Integer id, String[] args) {
-		// TODO Auto-generated method stub
-		return null;
+		assertNoLessThan(args, 2);
+		INT num = parseInt(args[1]);
+		if (args.length > 2)
+			isComment(args[2], true);
+		return new BoardSize(id, num);
 	}
 	
-	private BOOLEAN parseBoolean(String str){
-		if(str.trim().equals("true"))
-			return new BOOLEAN(true);
-		else if(str.trim().equals("false"))
-			return new BOOLEAN(false);
-		else throw new SyntaxException(str + " is neither true nor false.");
+	private void assertEmpty(String[] args){
+		if (args.length != 0 && !args[0].trim().equals("#"))
+			throw new SyntaxException(" No Parameters should be appanded here.");
+	}
+	
+	private void assertNoLessThan(String[] args, int num){
+		if (args.length < num)
+			throw new SyntaxException(" Number of parameters less than " + num + ".");
 	}
 
 	private COLOR parseColor(String str){
@@ -204,6 +267,8 @@ public class CommandFactory {
 	
 	private VERTEX parseVertex(String str){
 		str = str.trim();
+		if(str.equals("pass"))
+			return new VERTEX();
 		String column = str.substring(0, 1);
 		INT row = parseInt(str.substring(1, str.length()));
 		return new VERTEX(column, row.getInt());

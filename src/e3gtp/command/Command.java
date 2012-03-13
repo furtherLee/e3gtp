@@ -32,7 +32,7 @@ public class Command {
 	}
 	
 	public boolean hasId(){
-		return id != null;
+		return id != null && id >= 0;
 	}
 	
 	public void send(Connection conn) throws IOException{
