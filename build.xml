@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project default = "compile" basedir=".">
+
+  <property name="src.dir" value="src"/>
+  <property name="bin.dir" value="bin"/>
+  <property name="dst.dir" value="dst"/>
+
+  <target name="compile">
+    <mkdir dir="${bin.dir}"/>
+    <javac srcdir="${src.dir}" destdir="${bin.dir}" nowarn="true"/>
+  </target>
+
+  <target name="deploy" depends="compile">
+    <mkdir dir="${dst.dir}"/>
+    <jar jarfile="${dst.dir}/e3gtp0.10.jar" basedir="${bin.dir}">
+      <manifest>
+	<attribute name="Main-class" value="gogogo.Launcher"/>
+      </manifest>
+    </jar>
+  </target>
+
+  <target name="clean">
+    <delete dir="${bin.dir}"/>
+    <delete dir="${dst.dir}"/>
+  </target>
+
+</project>

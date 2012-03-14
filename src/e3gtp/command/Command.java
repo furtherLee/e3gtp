@@ -47,7 +47,7 @@ public abstract class Command {
 		sb.append(getName() + " ");
 		
 		for(Entity entity: args)
-			sb.append(entity.toString());
+			sb.append(entity.format());
 		
 		return sb.toString();
 	}

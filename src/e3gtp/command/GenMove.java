@@ -17,7 +17,7 @@ public class GenMove extends Command{
 		this.args.add(color);
 	}
 	
-	public COLOR getCOLOR(){
+	public COLOR getColor(){
 		return (COLOR)this.args.get(0);
 	}
 

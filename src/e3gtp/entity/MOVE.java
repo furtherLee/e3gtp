@@ -20,7 +20,7 @@ public class MOVE extends Entity{
 	}
 	
 	public String format(){
-		return color.format() + vertex;
+		return color.format() + vertex.format();
 	}
 	
 }

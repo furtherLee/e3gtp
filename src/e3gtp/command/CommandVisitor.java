@@ -14,7 +14,7 @@ public interface CommandVisitor {
 
 	public Response visit(Komi komi);
 
-	public Response visit(KownCommand kownCommand);
+	public Response visit(KnownCommand kownCommand);
 
 	public Response visit(ListCommands listCommands);
 

@@ -2,25 +2,34 @@ package e3gtp.connection;
 
 public class Response {
 	
-	Integer id;
+	final boolean success;
 	
-	String response;
+	final Integer id;
+	
+	final String response;
 
-	public Response(Integer id, String response){
+	public Response(Integer id, String response, boolean success){
 		this.id = id;
 		this.response = response;
+		this.success = success;
 	}
 	
-	public Response(String response){
+	public Response(String response, boolean success){
 		id = null;
 		this.response = response;
+		this.success = success;
 	}
 	
 	public String format(){
 		StringBuilder sb = new StringBuilder();
-		if (id != null)
-			sb.append(id + " ");
-		sb.append(response + "\n");
+		if (success)
+			sb.append("=");
+		else
+			sb.append("?");
+		if (id != null && id >= 0)
+			sb.append(id);
+		sb.append(" ");
+		sb.append(response + "\n\n");
 		return sb.toString();
 	}
 }

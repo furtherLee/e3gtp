@@ -32,6 +32,18 @@ public class VERTEX extends Entity{
 		
 	}
 	
+	public int getCol(){
+		return column;
+	}
+	
+	public int getRow(){
+		return row;
+	}
+	
+	public boolean isPass(){
+		return isPass;
+	}
+	
 	public String format(){
 		if(isPass)
 			return "pass";
