@@ -26,3 +26,4 @@ public class KnownCommand extends Command{
 		return visitor.visit(this);
 	}
 }
+
