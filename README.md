@@ -32,7 +32,7 @@ Connection is responsible to set up a stream for communication. An agent will co
 
 By the way, I implement all gtp types in package e3gtp.connection. I use `Visitor Pattern` here, since every agent algorithm is a visitor of commands. Therefore, the agent should keep state machine of itself. After visit a command, a command visitor should generate a `Response`. A response includes an ID(optional), whether succeed, and the response body according to the protocol.
 
-License: DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE(http://sam.zoy.org/wtfpl/COPYING)
+License: [DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE](http://sam.zoy.org/wtfpl/COPYING)
 
 Author: [Li Shijian](http://github.com/furtherLee)
 
